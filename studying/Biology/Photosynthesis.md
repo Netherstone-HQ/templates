@@ -1,6 +1,8 @@
 # Photosynthesis
 
-Plants make their own food using light energy. It happens in the chloroplasts (see [Cells](Cells.md)) and is the reverse of [Respiration](Respiration.md). The Energy cycle drawing shows how the two connect.
+Plants make their own food using light energy. It happens in the chloroplasts (see [Cells](Cells.md)) and is the reverse of [Respiration](Respiration.md).
+
+<img src="_attachments/Energy cycle.png" data-dark-src="_attachments/Energy cycle-dark.png" alt="Energy cycle" width="480" data-excalidraw="Biology/Energy cycle.excalidraw" />
 
 ## Key points
 

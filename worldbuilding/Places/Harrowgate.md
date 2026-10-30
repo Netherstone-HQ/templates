@@ -24,4 +24,4 @@ Founded by Ansel Vell at [The founding](../History/The%20founding.md). It has ne
 
 - A salt cart came back from inland empty, its driver missing
 - Someone has been buying up the Vells' old debts
-- A ship that sank at [Wrecker's Point](Wrecker%27s%20Point.md) twenty years ago has washed up again
+- The boat [Mara Vell](../People/Mara%20Vell.md)'s father sailed has washed up again, twenty-four years after it sank at [Wrecker's Point](Wrecker%27s%20Point.md)

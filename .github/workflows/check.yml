@@ -1,7 +1,9 @@
-name: Check templates
+name: Templates
 
 on:
   pull_request:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -17,3 +19,22 @@ jobs:
         with:
           node-version: 22
       - run: node .github/scripts/check-templates.mjs
+
+  # netherstone.app reads the templates at build time, so a checked change on
+  # main rebuilds it through its Workers Builds deploy hook.
+  deploy:
+    name: Rebuild the website
+    needs: check
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Call the deploy hook
+        env:
+          SITE_DEPLOY_HOOK: ${{ secrets.SITE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$SITE_DEPLOY_HOOK" ]; then
+            echo "::error::SITE_DEPLOY_HOOK is not set, so the website was not rebuilt."
+            exit 1
+          fi
+          curl --fail --silent --show-error -X POST "$SITE_DEPLOY_HOOK"

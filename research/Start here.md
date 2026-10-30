@@ -11,6 +11,8 @@ This vault follows one question from sources to findings. The example asks wheth
 
 The How it connects drawing maps which sources support which findings.
 
+<img src="_attachments/How it connects.png" data-dark-src="_attachments/How it connects-dark.png" alt="How it connects" width="480" data-excalidraw="How it connects.excalidraw" />
+
 ## Sources
 
 - [Mueller and Oppenheimer 2014](Sources/Mueller%20and%20Oppenheimer%202014.md)
@@ -24,4 +26,4 @@ The How it connects drawing maps which sources support which findings.
 
 ## Working this way
 
-Write a source shard as soon as you read something, while it's fresh. Keep your own words apart from the author's: quotes in quote blocks, your thoughts under **What I take from it**. A finding with no links behind it is a guess, so link every claim to a source.
+Write a source shard as soon as you read something, while it's fresh. Keep your own thoughts under **What I take from it**, apart from what the source says. Link every finding to the sources behind it.

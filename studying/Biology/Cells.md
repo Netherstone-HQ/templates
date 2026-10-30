@@ -1,6 +1,8 @@
 # Cells
 
-All living things are made of cells. Animal and plant cells are eukaryotic: their DNA is inside a nucleus. Bacteria are prokaryotic: no nucleus. The Cell diagram drawing in this folder shows both kinds side by side.
+All living things are made of cells. Animal and plant cells are eukaryotic: their DNA is inside a nucleus. Bacteria are prokaryotic: no nucleus.
+
+<img src="_attachments/Cell diagram.png" data-dark-src="_attachments/Cell diagram-dark.png" alt="Cell diagram" width="480" data-excalidraw="Biology/Cell diagram.excalidraw" />
 
 ## Key points
 

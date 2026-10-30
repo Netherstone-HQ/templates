@@ -6,7 +6,7 @@ The founding family of [Harrowgate](../Places/Harrowgate.md). They have owned th
 
 - [Mara Vell](Mara%20Vell.md), head of the family
 - Wren Vell, Mara's daughter, nineteen, wants to leave the coast
-- Corran Vell, Mara's cousin, runs the salt carts inland and thinks the pans should have been his
+- Edrin Vell, Mara's cousin, runs the salt carts inland and thinks the pans should have been his
 
 ## Customs
 

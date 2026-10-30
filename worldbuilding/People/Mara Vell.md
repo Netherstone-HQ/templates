@@ -4,7 +4,7 @@ Head of [The Vell family](The%20Vell%20family.md) and owner of the salt pans tha
 
 ## Who she is
 
-Forty-six, sharp, tired. She took over the pans at twenty-two when her father drowned, and she has spent every year since proving she deserved them. She knows every worker by name and every debt by heart.
+She's forty-six, sharp and tired. She took over the pans at twenty-two when her father drowned, and she has spent every year since proving she deserved them. She knows every worker by name and every debt by heart.
 
 ## What she wants
 

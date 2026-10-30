@@ -10,7 +10,7 @@ Students who type take longer notes and copy more of the lecture word for word t
 
 ## How sure
 
-Fairly sure. It shows up in every study here, and it makes sense: most people type faster than they write, so there's less pressure to summarise.
+Fairly sure. It shows up in both studies listed above, and it makes sense: most people type faster than they write, so there's less pressure to summarise.
 
 ## What it doesn't show
 

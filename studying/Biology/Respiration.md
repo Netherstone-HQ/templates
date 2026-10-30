@@ -1,6 +1,8 @@
 # Respiration
 
-Every living cell releases energy from glucose all the time. Aerobic respiration happens in the mitochondria (see [Cells](Cells.md)). It's the reverse of [Photosynthesis](Photosynthesis.md), as the Energy cycle drawing shows.
+Every living cell releases energy from glucose all the time. Aerobic respiration happens in the mitochondria (see [Cells](Cells.md)). It's the reverse of [Photosynthesis](Photosynthesis.md).
+
+<img src="_attachments/Energy cycle.png" data-dark-src="_attachments/Energy cycle-dark.png" alt="Energy cycle" width="480" data-excalidraw="Biology/Energy cycle.excalidraw" />
 
 ## Key points
 

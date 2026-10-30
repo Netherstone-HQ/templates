@@ -12,6 +12,9 @@ const FIELDS = ["name", "line", "firstShard", "minAppVersion", "order"];
 const ATTACHMENTS = "_attachments";
 // The pictures the app keeps in a vault's _attachments folder.
 const PICTURES = new Set(["png", "jpg", "jpeg", "gif", "webp", "bmp", "svg", "avif", "tif", "tiff"]);
+// Names Windows can't hold, since templates are unzipped there too.
+const WINDOWS_CHARACTERS = /[<>:"\\|?*\u0000-\u001f]/;
+const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;
 
 const errors = [];
 const fail = (file, message) => errors.push({ file, message });
@@ -26,6 +29,12 @@ function walk(root, dir = root, files = []) {
     const rel = toPosix(path.relative(path.dirname(root), full));
     if (entry.name.startsWith(".")) {
       fail(rel, "Hidden files and folders can't be in a template");
+    } else if (
+      WINDOWS_CHARACTERS.test(entry.name) ||
+      /[. ]$/.test(entry.name) ||
+      WINDOWS_RESERVED.test(entry.name.split(".")[0])
+    ) {
+      fail(rel, "Windows can't hold this name: no < > : \" \\ | ? *, no dot or space at the end, no reserved names like CON or NUL");
     } else if (entry.isSymbolicLink()) {
       fail(rel, "Links can't be in a template");
     } else if (entry.isDirectory()) {
@@ -44,21 +53,42 @@ function withoutCode(markdown) {
     .replace(/`[^`\n]*`/g, "");
 }
 
-/** Relative link and picture targets in a shard: Markdown links and <img src>. */
-function localTargets(markdown) {
-  const text = withoutCode(markdown);
+/** Decodes the entities the app writes in HTML attributes. */
+function decodeAttribute(value) {
+  return value
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+
+/**
+ * Local targets in a shard: Markdown links and pictures, `<...>` targets
+ * included, and every picture tag's src and data-dark-src.
+ */
+function localTargets(text) {
   const targets = [];
-  for (const match of text.matchAll(/!?\[(?:[^\]\\]|\\.)*\]\(\s*<?([^)\s>]+)>?(?:\s+"[^"]*")?\s*\)/g)) {
-    targets.push(match[1]);
+  for (const match of text.matchAll(/!?\[(?:[^\]\\]|\\.)*\]\(\s*(?:<([^>\n]*)>|([^)\s]+))(?:\s+"[^"]*")?\s*\)/g)) {
+    targets.push(match[1] ?? match[2]);
   }
-  for (const match of text.matchAll(/<img\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)) {
-    targets.push(match[1]);
+  for (const tag of text.matchAll(/<img\b[^>]*>/gi)) {
+    for (const match of tag[0].matchAll(/\b(src|data-dark-src)\s*=\s*"([^"]*)"/gi)) {
+      targets.push(decodeAttribute(match[2]));
+    }
   }
   return targets.filter(
     (target) =>
       !target.startsWith("#") &&
       !target.startsWith("//") &&
       !/^[a-z][a-z0-9+.-]*:/i.test(target),
+  );
+}
+
+/** The drawings picture tags link to, as paths from the vault's top. */
+function drawingRefs(text) {
+  return [...text.matchAll(/<img\b[^>]*\bdata-excalidraw\s*=\s*"([^"]*)"/gi)].map(
+    (match) => decodeAttribute(match[1]),
   );
 }
 
@@ -77,6 +107,13 @@ function checkTemplate(id, dir, orders) {
 
   const files = walk(dir);
   const known = new Set(files);
+  const seen = new Map();
+  for (const file of files) {
+    const key = file.toLowerCase();
+    if (seen.has(key)) fail(`${id}/${file}`, `Same name as ${id}/${seen.get(key)} apart from case, which Windows and macOS can't hold`);
+    seen.set(key, file);
+  }
+  const usedPictures = new Set();
 
   for (const file of files) {
     const where = `${id}/${file}`;
@@ -102,14 +139,16 @@ function checkTemplate(id, dir, orders) {
 
     if (ext === "excalidraw") {
       const scene = readJson(where, full);
-      if (scene && (scene.type !== "excalidraw" || !Array.isArray(scene.elements))) {
-        fail(where, "Not a drawing: needs \"type\": \"excalidraw\" and an elements list");
-      }
+      if (scene) checkDrawing(where, scene);
     }
 
     if (ext === "md") {
       const folder = path.posix.dirname(file);
-      for (const target of localTargets(fs.readFileSync(full, "utf8"))) {
+      const text = withoutCode(fs.readFileSync(full, "utf8"));
+      if (/\[\[[^\]\n]+\]\]/.test(text)) {
+        fail(where, "[[ ]] links don't work in Netherstone; use @ links, which are saved as relative Markdown links");
+      }
+      for (const target of localTargets(text)) {
         const decoded = decode(target.split(/[?#]/)[0]);
         if (decoded === null) {
           fail(where, `Link ${target} isn't a valid address`);
@@ -119,13 +158,54 @@ function checkTemplate(id, dir, orders) {
           fail(where, `Link ${target} must be relative to the shard`);
           continue;
         }
-        const resolved = path.posix.normalize(path.posix.join(folder, decoded));
+        // The app keeps pictures by their path from the vault's top.
+        const base = decoded.replace(/^\.\//, "").startsWith(`${ATTACHMENTS}/`) ? "" : folder;
+        const resolved = path.posix.normalize(path.posix.join(base, decoded));
         if (resolved.startsWith("../") || resolved === "..") {
           fail(where, `Link ${target} points outside the template`);
         } else if (!known.has(resolved)) {
           fail(where, `Link ${target} doesn't resolve: there's no ${resolved} in ${id}`);
+        } else {
+          usedPictures.add(resolved);
         }
       }
+      for (const ref of drawingRefs(text)) {
+        if (!ref.endsWith(".excalidraw") || !known.has(ref)) {
+          fail(where, `A picture links to the drawing ${ref}, which isn't in ${id}`);
+        }
+      }
+    }
+  }
+
+  for (const file of files) {
+    if (file.startsWith(`${ATTACHMENTS}/`) && !usedPictures.has(file)) {
+      fail(`${id}/${file}`, "No shard uses this picture");
+    }
+  }
+}
+
+/** A drawing the app can open: unique ids, and every link between elements points at one that exists. */
+function checkDrawing(where, scene) {
+  if (scene.type !== "excalidraw" || !Array.isArray(scene.elements)) {
+    fail(where, "Not a drawing: needs \"type\": \"excalidraw\" and an elements list");
+    return;
+  }
+  const ids = new Set();
+  for (const element of scene.elements) {
+    if (typeof element?.id !== "string" || ids.has(element.id)) {
+      fail(where, `Every element needs its own id (${element?.id ?? "missing"})`);
+    }
+    ids.add(element?.id);
+  }
+  for (const element of scene.elements) {
+    const refs = [
+      element.containerId,
+      element.startBinding?.elementId,
+      element.endBinding?.elementId,
+      ...(Array.isArray(element.boundElements) ? element.boundElements.map((bound) => bound?.id) : []),
+    ];
+    for (const ref of refs) {
+      if (ref != null && !ids.has(ref)) fail(where, `Element ${element.id} points at ${ref}, which isn't in the drawing`);
     }
   }
 }

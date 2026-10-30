@@ -15,7 +15,7 @@ Replace them with your own subjects, or keep them as examples of how a topic sha
 - **Links** to the topics it depends on, so revising one leads you to the next
 - **Test yourself** last: questions you answer from memory before looking up
 
-[How to revise](How%20to%20revise.md) explains why the questions matter more than the notes.
+[How to revise](How%20to%20revise.md) explains why answering questions works better than rereading.
 
 ## Adding a subject
 

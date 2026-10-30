@@ -4,7 +4,7 @@ Keeper of the light at [Wrecker's Point](../Places/Wrecker%27s%20Point.md). Nobo
 
 ## Who he is
 
-Somewhere past seventy, half deaf, entirely stubborn. He talks to the gulls and to the dead buried on the headland, and he says both answer more sensibly than the living.
+He's somewhere past seventy, half deaf and stubborn. He talks to the gulls and to the dead buried on the headland, and he says both answer more sensibly than the living.
 
 ## What he wants
 

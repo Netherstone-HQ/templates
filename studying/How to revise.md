@@ -1,6 +1,6 @@
 # How to revise
 
-Rereading feels productive because the material looks familiar. Familiar is not the same as remembered. These methods have the strongest evidence behind them.
+Rereading feels productive because the material looks familiar, but that doesn't mean you remember it. These methods have the strongest evidence behind them.
 
 ## Test yourself
 
@@ -8,11 +8,11 @@ Close the shard and answer its **Test yourself** questions from memory, out loud
 
 ## Space it out
 
-Come back to a topic after a day, then a few days, then a week. Forgetting a little between sessions is what makes the next recall stick. One hour spread over a week beats one hour the night before.
+Come back to a topic after a day, then a few days, then a week. Forgetting a little between sessions is what makes the next recall stick. An hour spread over a week works better than an hour the night before.
 
 ## Mix topics
 
-Switch between topics in one session, for example [Photosynthesis](Biology/Photosynthesis.md) then [Causes of the revolution](History/Causes%20of%20the%20revolution.md) then [Respiration](Biology/Respiration.md). It feels slower, and it trains you to pick the right idea when a question doesn't say which topic it's from.
+Switch between topics in one session, for example [Photosynthesis](Biology/Photosynthesis.md) then [Respiration](Biology/Respiration.md) then [Cells](Biology/Cells.md). It feels slower, and it trains you to tell similar ideas apart when a question doesn't say which topic it's from.
 
 ## Explain it
 

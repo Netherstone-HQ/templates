@@ -1,10 +1,12 @@
 # The Salt Coast
 
-A long cold shoreline of salt flats, low cliffs and shallow bays in the far north. The Map of the coast drawing shows the whole stretch.
+A long cold shoreline of salt flats, low cliffs and shallow bays in the far north.
+
+<img src="_attachments/Map of the coast.png" data-dark-src="_attachments/Map of the coast-dark.png" alt="Map of the coast" width="480" data-excalidraw="Map of the coast.excalidraw" />
 
 ## What it is like
 
-Flat grey water, flat grey land, and a sky that does most of the talking. Summers are short and bright, when the pans dry and everyone works. Winters are long, and the sea fog can sit on the coast for a week.
+Flat grey water, flat grey land and a sky that rarely clears. Summers are short and bright, when the pans dry and everyone works. Winters are long, and the sea fog can sit on the coast for a week.
 
 ## Who lives here
 

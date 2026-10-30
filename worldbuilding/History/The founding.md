@@ -14,6 +14,8 @@ The northern shore was cold, flat and grey, with shallow bays that flooded at sp
 
 ## What it left behind
 
-The founding is why the Vells still run Harrowgate, why the headland is holy and haunted in equal measure, and why coast people distrust anyone from the inland valleys. Most of the conflicts in [The Vell family](../People/The%20Vell%20family.md) go back to promises Ansel made that first winter.
+The founding is why the Vells still run Harrowgate, why the headland is holy and why people say it's haunted, and why coast people distrust anyone from the inland valleys. Most of the conflicts in [The Vell family](../People/The%20Vell%20family.md) go back to promises Ansel made that first winter.
 
-The Timeline drawing in this folder runs from the founding to the day the story starts.
+The Timeline drawing runs from the founding to the day the story starts.
+
+<img src="_attachments/Timeline.png" data-dark-src="_attachments/Timeline-dark.png" alt="Timeline" width="480" data-excalidraw="History/Timeline.excalidraw" />
