@@ -2,6 +2,6 @@
   "name": "Studying",
   "line": "One folder for each subject",
   "firstShard": "Start here.md",
-  "minAppVersion": "0.7.0-beta.1",
+  "minAppVersion": "0.6.0-beta.3",
   "order": 2
 }
