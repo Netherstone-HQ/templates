@@ -1,0 +1,7 @@
+{
+  "name": "Research",
+  "line": "Sources and what you found in them",
+  "firstShard": "Start here.md",
+  "minAppVersion": "0.7.0-beta.1",
+  "order": 3
+}

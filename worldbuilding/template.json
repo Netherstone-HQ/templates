@@ -1,0 +1,7 @@
+{
+  "name": "Worldbuilding",
+  "line": "A world for a story or a game",
+  "firstShard": "Start here.md",
+  "minAppVersion": "0.7.0-beta.1",
+  "order": 1
+}
