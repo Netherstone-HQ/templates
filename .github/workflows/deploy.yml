@@ -1,0 +1,29 @@
+name: Rebuild the website
+
+# netherstone.app reads the templates at build time, so a change on main
+# rebuilds it through its Workers Builds deploy hook.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - README.md
+      - .github/**
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Rebuild the website
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Call the deploy hook
+        env:
+          SITE_DEPLOY_HOOK: ${{ secrets.SITE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$SITE_DEPLOY_HOOK" ]; then
+            echo "::warning::SITE_DEPLOY_HOOK is not set, so the website was not rebuilt."
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST "$SITE_DEPLOY_HOOK"
